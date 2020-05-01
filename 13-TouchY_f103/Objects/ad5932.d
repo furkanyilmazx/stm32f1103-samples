@@ -1,0 +1,19 @@
+.\objects\ad5932.o: AD5932.c
+.\objects\ad5932.o: AD5932.h
+.\objects\ad5932.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
+.\objects\ad5932.o: .\Libraries\CMSIS\CM3\CoreSupport\core_cm3.h
+.\objects\ad5932.o: D:\Programs\Laptop\kurulu programlar\KEIL_V5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\ad5932.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.h
+.\objects\ad5932.o: .\stm32f10x_conf.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h
+.\objects\ad5932.o: .\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h
+.\objects\ad5932.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h

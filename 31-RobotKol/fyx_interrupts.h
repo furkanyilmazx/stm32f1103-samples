@@ -1,0 +1,8 @@
+#ifndef FYX_INTERRUPTS
+#define FYX_INTERRUPTS
+
+
+
+
+
+#endif FYX_INTERRUPTS

@@ -1,0 +1,17 @@
+L 1 "src\usb_endp.c"
+Nvoid EP1_IN_Callback (void) // usarttan geleni oku usb ye bas
+N{
+N
+N}
+N
+N
+Nvoid EP3_OUT_Callback(void) // usb den geleni oku ve  usart a bas
+N{
+N
+N}
+N
+Nvoid SOF_Callback(void)
+N{
+N
+N}
+N

@@ -1,0 +1,95 @@
+#include <stm32f10x.h>
+#include <stm32f10x_gpio.h>
+#include <stm32f10x_rcc.h>
+#include <stm32f10x_usart.h>
+#include <stm32f10x_spi.h>
+
+
+#define USART1_Rx GPIO_Pin_10
+#define USART1_Tx GPIO_Pin_9
+
+#define USART2_Rx GPIO_Pin_3
+#define USART2_Tx GPIO_Pin_2
+
+
+GPIO_InitTypeDef 	GPIO_InitStruct;
+USART_InitTypeDef USART_InitStructure;
+NVIC_InitTypeDef	NVIC_DEF;
+
+uint16_t RxBuffer;
+uint8_t TxCounter = 0;  
+	
+void USART1_Init(){
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1,ENABLE);
+	
+	
+	GPIO_InitStruct.GPIO_Pin = USART1_Tx;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA, &GPIO_InitStruct);
+	
+	USART_InitStructure.USART_BaudRate = 9600;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Tx;
+	
+	USART_Init(USART1,&USART_InitStructure);
+	USART_Cmd(USART1,ENABLE);
+	
+	GPIO_InitStruct.GPIO_Pin = USART2_Rx;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_Init(GPIOA, &GPIO_InitStruct);
+	
+	USART_InitStructure.USART_Mode = USART_Mode_Rx;
+	USART_Init(USART2,&USART_InitStructure);
+	USART_ITConfig(USART2,USART_IT_RXNE,ENABLE);
+	USART_Cmd(USART2,ENABLE);
+	
+	NVIC_SetPriorityGrouping(NVIC_PriorityGroup_2);
+	
+	NVIC_DEF.NVIC_IRQChannel = USART2_IRQn;
+	NVIC_DEF.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_DEF.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_DEF.NVIC_IRQChannelSubPriority = 0;
+	
+	NVIC_Init(&NVIC_DEF);
+	
+	
+	
+}
+
+void USART2_IRQHandler(){
+
+	if(USART_GetFlagStatus(USART2,USART_IT_RXNE) == SET){
+		RxBuffer = USART_ReceiveData(USART2);
+		USART_ClearFlag(USART2,USART_FLAG_RXNE);
+		USART_SendData(USART1,RxBuffer);
+		while(USART_GetFlagStatus(USART1,USART_FLAG_TXE) == );
+	}
+	
+}
+
+int main(){
+
+	SystemInit();
+	SystemCoreClockUpdate();
+	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);	
+	
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_8;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_Init(GPIOB, &GPIO_InitStruct);
+	GPIO_SetBits(GPIOB, GPIO_Pin_8);
+	
+	
+	USART1_Init();
+	USART_SendData(USART1,'A');
+	
+	 while(1){
+	 
+	}
+}
